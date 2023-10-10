@@ -1,12 +1,12 @@
 'use client'
 
-import ThanksPage from '@/components/ThanksPage'
+import StatsPage from '@/components/StatsPage'
 import { SessionProvider } from 'next-auth/react';
 
-export default function Thanks() {
+export default function Stats() {
   return (
     <SessionProvider>
-      <ThanksPage />
+      <StatsPage />
     </SessionProvider>
   )
 }

@@ -17,7 +17,7 @@ export default function StartPage() {
       <>
         <Navbar />
         <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center font-semibold text-red'>
-          Error: Already Voted
+          Error! Please contact the admin.
         </div>
         <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
           <button className='rounded bg-accented text-white p-3 mx-2' onClick={() => signOut()}>Logout</button>

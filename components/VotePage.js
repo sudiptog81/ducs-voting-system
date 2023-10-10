@@ -71,7 +71,7 @@ export default function StartPage() {
               <label for='agree' className='ml-2'>I agree that I am voting for the selected candidates</label>
             </div>
             <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
-              <input className='rounded bg-accented text-white p-3 mx-2' type='submit' />
+              <input className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' type='submit' />
             </div>
           </form>
         </>

@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 
-export default function StartPage() {
+export default function ThanksPage() {
   const { data: session } = useSession();
 
   if (session)
