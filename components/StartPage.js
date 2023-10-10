@@ -8,6 +8,7 @@ import { getServerSession } from 'next-auth';
 import Navbar from '@/components/Navbar'
 import LoginBtn from '@/components/LoginBtn'
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 
 export default function StartPage() {
@@ -46,9 +47,14 @@ export default function StartPage() {
             <span>Loading...</span>
           </div>
         ) : status === 'unauthenticated' ? (
-          <div className='w-96 pt-10 h-full m-auto text-center'>
-            <button className='rounded bg-accented text-white p-3' onClick={() => signIn()}>Login with DU Google Account</button>
-          </div>
+          <>
+            <div className='w-96 pt-10 h-full m-auto text-center'>
+              <Image src='/University_of_Delhi.png' width={200} height={200} className='m-auto'/>
+            </div>
+            <div className='w-96 pt-10 h-full m-auto text-center'>
+              <button className='rounded bg-accented text-white p-3' onClick={() => signIn()}>Login with DU Google Account</button>
+            </div>
+          </>
         ) : <></>
       }
       
