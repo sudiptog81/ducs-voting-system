@@ -1,12 +1,12 @@
 'use client'
 
-import StartPage from '@/components/StartPage'
+import VotePage from '@/components/VotePage'
 import { SessionProvider } from 'next-auth/react';
 
-export default function Home() {
+export default function Vote() {
   return (
     <SessionProvider>
-      <StartPage />
+      <VotePage />
     </SessionProvider>
   )
 }
