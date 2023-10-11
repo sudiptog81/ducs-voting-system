@@ -22,7 +22,7 @@ export default function ThanksPage() {
           Vote has been recorded - thank you!
         </div>
         <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
-          <button className='rounded bg-accented text-white p-3 mx-2' onClick={() => signOut()}>Logout</button>
+          <Link className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' href='/'>Go to Dashboard</Link>
         </div>
       </>
     )
