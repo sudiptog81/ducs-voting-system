@@ -46,7 +46,7 @@ export default function ThanksPage() {
               <SpinnerLoading />
             </div>
           )}
-          {users.length && users.map((e, i) => (
+          {users.length > 0 && users.map((e, i) => (
             <div key={i} className={"items-center p-1 mb-4 rounded text-center text-xl " + (!i && 'text-accented')} role="alert">
                 <span className='font-bold'>{e.name} ({e.course})</span> has voted
             </div>))}
