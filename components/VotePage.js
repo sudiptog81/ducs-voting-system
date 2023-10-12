@@ -17,10 +17,10 @@ export default function StartPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    fetch('/api/posts').then(res => res.json()).then(res => {
+      setPosts(res);
       setLoading(false);
-    }, 2000);
-    fetch('/api/posts').then(res => res.json()).then(res => setPosts(res))
+     })
   }, []);
 
   const handleSubmit = async (e) => {
