@@ -9,6 +9,7 @@ import Navbar from '@/components/Navbar'
 import LoginBtn from '@/components/LoginBtn'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import SpinnerLoading from './Loader';
 
 export default function ThanksPage() {
   const { data: session } = useSession();
@@ -18,31 +19,26 @@ export default function ThanksPage() {
     audio.play();
   }, []);
 
-  if (session)
-    return (
-      <>
-        <Navbar />
+  return (
+    <>
+      <Navbar />
+      {session ? (
         <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center font-semibold text-red'>
           Vote has been recorded - thank you!
         </div>
-        <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
-          <Link className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' href='/'>Go to Dashboard</Link>
-        </div>
-        <div className='w-96 pt-10 h-full m-auto text-center'>
-          Developed with ♥ at DUCS
-        </div>
-      </>
-    )
-  else 
-    return (
-      <>
-        <Navbar />
-        <div className='w-96 pt-10 h-full m-auto text-center'>
-          <button className='rounded bg-accented text-white p-3' onClick={() => signIn()}>Login with DU Google Account</button>
-        </div>
-        <div className='w-96 pt-10 h-full m-auto text-center'>
-          Developed with ♥ at DUCS
-        </div>
-      </>
+      ) : (
+        <>
+          <div className='w-96 pt-10 h-full m-auto text-center flex items-center justify-center'>
+            <SpinnerLoading />
+          </div>
+        </>
+      )}
+      <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
+        <Link className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' href='/'>Go to Dashboard</Link>
+      </div>
+      <div className='w-96 pt-10 h-full m-auto text-center'>
+        Developed with ♥ at DUCS
+      </div>
+    </>
     )
 }
