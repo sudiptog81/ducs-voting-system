@@ -25,7 +25,10 @@ export default function StartPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget)
+    
+    const formData = new FormData(e.currentTarget);
+    formData.append('secret', process.env.NEXT_PUBLIC_SECRET);
+
     const response = await fetch('/api/vote', {
       method: 'POST',
       body: formData,

@@ -12,7 +12,12 @@ export async function POST(request, response) {
   }
 
   const data = await request.formData();
-  const {email, president, vice_president, treasurer, secretary, joint_secretary, agree} = Object.fromEntries(data)
+  const {email, president, vice_president, treasurer, secretary, joint_secretary, agree, secret} = Object.fromEntries(data)
+
+  if (secret != process.env.NEXT_PUBLIC_SECRET) {
+    return Response.json({error: 'Unauthorized'}, {status: 401});
+  }
+
   try {
     await insertVote(email, president, vice_president, treasurer, secretary, joint_secretary);
     return Response.json({success: true})

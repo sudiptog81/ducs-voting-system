@@ -22,7 +22,13 @@ export default function ThanksPage() {
     }
 
     setInterval(() => {
-      fetch('/api/voted-list')
+      fetch('/api/voted-list', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({secret: process.env.NEXT_PUBLIC_SECRET})
+        })
         .then(res => res.json())
         .then(data => {
           setUsers(data.voted);
