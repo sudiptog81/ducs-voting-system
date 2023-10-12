@@ -3,10 +3,10 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/dist/server/api-utils";
 import { NextResponse } from "next/server";
 
-export async function GET(request, response) {
-  const session = await getServerSession({req: request});
-
-  if (!session) {
+export async function POST(request, response) {
+  const {secret} = await request.json();
+  
+  if (secret != process.env.NEXT_PUBLIC_SECRET) {
     return Response.json({error: 'Unauthorized'}, {status: 401});
   }
 

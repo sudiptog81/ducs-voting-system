@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 import Navbar from '@/components/Navbar'
+import SpinnerLoading from '@/components/Loader'
 import LoginBtn from '@/components/LoginBtn'
 import { useEffect, useState } from 'react';
 
@@ -13,8 +14,12 @@ export default function StartPage() {
   const { push } = useRouter();
   const { data: session } = useSession();
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
     fetch('/api/posts').then(res => res.json()).then(res => setPosts(res))
   }, []);
 
@@ -37,9 +42,9 @@ export default function StartPage() {
   return (
     <>
       <Navbar />
-      {!session && (
-        <div className='w-48 mx-auto h-full text-center mt-10'>
-          Not Logged In
+      {(loading || !session) && (
+        <div className='w-96 pt-10 h-full m-auto text-center flex items-center justify-center'>
+          <SpinnerLoading />
         </div>
       )}
       {session && (
@@ -48,8 +53,8 @@ export default function StartPage() {
             <input type='hidden' name='email' value={session.user.email} />
             <div className='w-96 pt-10 h-full m-auto grid grid-cols-2 justify-between'>
               {posts.length == 0  && (
-                <div className='text-center'>
-                  Loading...
+                <div className='w-96 pt-10 h-full m-auto text-center flex items-center justify-center'>
+                  <SpinnerLoading />
                 </div>
               )}
               {posts && posts.map((e, i) => (
@@ -58,7 +63,7 @@ export default function StartPage() {
                   <div className='flex flex-col'>
                     {e.candidates.map((_e, i) => (
                       <div key={i} id='candidate-div flex flex-row'>
-                        <input type='radio' required name={e.post} value={_e} id={_e.replace(/\s+/g, '-') + '-' + e.post} />
+                        <input type='radio' required name={e.post} value={_e} id={_e.replaceAll(/\s+/g, '-') + '-' + e.post} />
                         <label className='ml-4' htmlFor={_e + '-' + e.post}>{_e}</label>
                       </div>
                     ))} 
@@ -68,7 +73,7 @@ export default function StartPage() {
             </div>
             <div className='w-100 pt-10 h-full m-auto flex justify-center items-center align-center'>
               <input type='checkbox' required name='agree' id='agree' />
-              <label for='agree' className='ml-2'>I agree that I am voting for the selected candidates</label>
+              <label htmlFor='agree' className='ml-2'>I agree that I am voting for the selected candidates</label>
             </div>
             <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
               <input className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' type='submit' />

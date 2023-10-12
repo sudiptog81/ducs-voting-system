@@ -10,9 +10,13 @@ import LoginBtn from '@/components/LoginBtn'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-
 export default function ThanksPage() {
   const { data: session } = useSession();
+
+  useEffect(() => {
+    const audio = new Audio('/beep.mp3');
+    audio.play();
+  }, []);
 
   if (session)
     return (
@@ -23,6 +27,9 @@ export default function ThanksPage() {
         </div>
         <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
           <Link className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' href='/'>Go to Dashboard</Link>
+        </div>
+        <div className='w-96 pt-10 h-full m-auto text-center'>
+          Developed with ♥ at DUCS
         </div>
       </>
     )
