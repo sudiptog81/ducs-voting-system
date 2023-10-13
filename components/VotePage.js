@@ -12,16 +12,36 @@ import { useEffect, useState } from 'react';
 
 export default function StartPage() {
   const { push } = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [voted, setVoted] = useState(false);
 
   useEffect(() => {
-    fetch('/api/posts').then(res => res.json()).then(res => {
-      setPosts(res);
-      setLoading(false);
-    })
-  }, []);
+    if (status === 'authenticated') {
+      fetch('/api/voted', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          email: session?.user.email
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.voted) { setVoted(true) }
+      })
+      .catch(e => alert(e));
+      
+      fetch('/api/posts').then(res => res.json()).then(res => {
+        setPosts(res);
+        setLoading(false);
+      });
+    }
+  }, [status]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,12 +80,17 @@ export default function StartPage() {
   return (
     <>
       <Navbar />
-      {(loading || !session) && (
-        <div className='w-96 pt-10 h-full m-auto text-center flex items-center justify-center'>
-          <SpinnerLoading />
-        </div>
+      {voted && (
+        <>
+          <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center font-semibold text-red'>
+            You have already voted - you cannot vote again!
+          </div>
+          <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
+            <Link className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' href='/'>Go to Dashboard</Link>
+          </div>
+        </>
       )}
-      {session && (
+      {session && !voted && (
         <>
           <form id='voting-form' onSubmit={handleSubmit}>
             <input type='hidden' name='email' value={session.user.email} />
