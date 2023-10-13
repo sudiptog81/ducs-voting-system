@@ -103,17 +103,17 @@ NEXTAUTH_SECRET="...secret used for authentication..."
 
 ## Screenshots
 
-![](".github/Screenshot from 2023-10-13 20-03-00.png")
+![1]("./.github/Screenshot%20from%202023-10-13%2020-03-00.png")
 
-![](".github/Screenshot from 2023-10-13 20-04-14.png")
+![2]("./.github/Screenshot%20from%202023-10-13%2020-04-14.png")
 
-![](".github/Screenshot from 2023-10-13 20-04-23.png")
+![3]("./.github/Screenshot%20from%202023-10-13%2020-04-23.png")
 
-![](".github/Screenshot from 2023-10-13 20-04-36.png")
+![4]("./.github/Screenshot%20from%202023-10-13%2020-04-36.png")
 
-![](".github/Screenshot from 2023-10-13 20-05-01.png")
+![5]("./.github/Screenshot%20from%202023-10-13%2020-05-01.png")
 
-![](".github/Screenshot from 2023-10-13 20-05-08.png")
+![6]("./.github/Screenshot%20from%202023-10-13%2020-05-08.png")
 
 ## License
 
