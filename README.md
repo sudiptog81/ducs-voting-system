@@ -1,4 +1,4 @@
-This repository contains the source code for the voting system used for DUCSS Elections 2023. It was built on top of Next.js and uses Prisma as an ORM for the database. The databases used were PostgreSQL for deployed instances and SQLite for offline instances.
+This repository contains the source code for the voting system used for DUCSS Elections 2023. It was built on top of the Next.js framework and uses Prisma as an ORM for the database. The databases used were PostgreSQL for deployed instances and SQLite for offline instances.
 
 ## Features
 
@@ -8,6 +8,24 @@ This repository contains the source code for the voting system used for DUCSS El
 - Visualization of list of students who have voted
 - Support for multiple courses and sections
 - TODO: Support for multiple elections
+
+### Notes
+
+- A voter can vote for only one candidate for a post
+- A voter can vote only once and cannot change their vote
+
+## Instructions
+
+- The list of students who can vote is stored in the `User` table in the database
+- The list of candidates running for various posts is stored in the `Candidate` table in the database
+- The list of votes casted by students is stored in the `Vote` table in the database
+
+### Guarded Routes
+
+These routes are accessible only when a `secret` is provided as a query parameter defined in the environment variable `NEXT_PUBLIC_SECRET`.
+
+- The list of students who have voted can be viewed at `/list` route
+- The statistics of the election can be viewed at `/stats` route only when a `secret` is provided as a query parameter defined in the environment variable `NEXT_PUBLIC_SECRET`
 
 ## Getting Started
 
