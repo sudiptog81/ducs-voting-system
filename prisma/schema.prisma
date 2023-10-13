@@ -13,12 +13,21 @@ model User {
   course String
 }
 
+model Candidate {
+  name   String @id
+  course String
+  post   String
+  serial Int?
+}
+
 model Vote {
-  email           String    @id
-  president       String
-  vice_president  String
-  treasurer       String
-  secretary       String
-  joint_secretary String
-  createdAt       DateTime? @default(now())
+  id        String    @id @default(uuid())
+  email     String
+  post      String
+  candidate String
+  createdAt DateTime? @default(now())
+}
+
+model Course {
+  name String @id
 }

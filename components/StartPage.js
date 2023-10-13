@@ -14,7 +14,8 @@ import Image from 'next/image';
 
 export default function StartPage() {
   const [email, setEmail] = useState('');
-  const [course, setCourse] = useState('M.Sc. First Year');
+  const [course, setCourse] = useState('');
+  const [courses, setCourses] = useState([]);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -53,6 +54,17 @@ export default function StartPage() {
         if (data.voted) { setVoted(true) }
       })
       .catch(e => alert(e));
+    } else {
+      fetch('/api/courses', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(res => res.json())
+      .then(data => setCourses(data))
+      .catch(e => alert(e));
     }
     
     setTimeout(() => {
@@ -78,11 +90,12 @@ export default function StartPage() {
               <div>
                 <form onSubmit={handleSignIn} className='mb-5'>
                   <select required name="role" className='bg-accented border border-gray-300 text-white rounded-lg w-full p-2.5' value={course} onChange={(e) => setCourse(e.target.value)}>
-                    <option value="M.Sc. First Year">M.Sc. First Year</option>
-                    <option value="M.Sc. Second Year">M.Sc. Second Year</option>
-                    <option value="M.C.A. First Year">M.C.A. First Year</option>
-                    <option value="M.C.A. Second Year">M.C.A. Second Year</option>
-                    <option value="M.C.A. Third Year">M.C.A. Third Year</option>
+                    <option value="" disabled selected>Select Course</option>
+                    {
+                      courses.map((course, index) => (
+                        <option key={index} value={course.name}>{course.name}</option>
+                      ))
+                    }
                   </select>
                   <input required type="email" name="email" placeholder="Email" className='bg-white border border-gray-300 rounded-lg w-full p-2.5 mt-5' value={email} onChange={(e) => setEmail(e.target.value)} />
                   <button type='submit' className='rounded bg-accented text-white p-3 mt-10'>Login</button>

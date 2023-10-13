@@ -23,11 +23,11 @@ ChartJS.register(
 
 export default function BarChart({ data, post }) {
   const chartData = {
-    labels: data.map(d => d[post]),
+    labels: data.map(d => d.name),
     datasets: [
       {
         label: "Votes",
-        data: data.map(d => d._count),
+        data: data.map(d => d.votes),
         backgroundColor: "#652b7c",
         borderColor: "#652b7c",
         borderWidth: 1,

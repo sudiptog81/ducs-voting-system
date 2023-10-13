@@ -20,7 +20,7 @@ export default function StartPage() {
     fetch('/api/posts').then(res => res.json()).then(res => {
       setPosts(res);
       setLoading(false);
-     })
+    })
   }, []);
 
   const handleSubmit = async (e) => {
@@ -29,9 +29,24 @@ export default function StartPage() {
     const formData = new FormData(e.currentTarget);
     formData.append('secret', process.env.NEXT_PUBLIC_SECRET);
 
+    const object = {};
+    formData.forEach((value, key) => {
+      object[key] = value;
+    });
+
+    object['votes'] = {};
+    for (const [key, value] of formData.entries()) {
+      if (key != 'email' && key != 'agree' && key != 'secret') {
+        object['votes'][key] = value;
+      }
+    }
+
     const response = await fetch('/api/vote', {
       method: 'POST',
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(object),
     })
  
     const {success} = await response.json()
@@ -62,12 +77,14 @@ export default function StartPage() {
               )}
               {posts && posts.map((e, i) => (
                 <div key={i} id='post-div p-4 m-4 row-gap-4'>
-                  <h2 className='font-semibold mt-4 mb-2'>{e.label}</h2>
+                  <h2 className='font-semibold mt-4 mb-2'>{e.post}</h2>
                   <div className='flex flex-col'>
                     {e.candidates.map((_e, i) => (
                       <div key={i} id='candidate-div flex flex-row'>
-                        <input type='radio' required name={e.post} value={_e} id={_e.replaceAll(/\s+/g, '-') + '-' + e.post} />
-                        <label className='ml-4' htmlFor={_e + '-' + e.post}>{_e}</label>
+                        <label  htmlFor={_e.name + '-' + e.post}>
+                          <input type='radio' required name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post} />
+                          <span className='ml-4'>{_e.name}</span>
+                        </label>
                       </div>
                     ))} 
                   </div>

@@ -11,15 +11,17 @@ export async function POST(request, response) {
     return Response.json({error: 'Unauthorized'}, {status: 401});
   }
 
-  const data = await request.formData();
-  const {email, president, vice_president, treasurer, secretary, joint_secretary, agree, secret} = Object.fromEntries(data)
+  const data = await request.json();
+  const {email, votes, secret} = data;
 
   if (secret != process.env.NEXT_PUBLIC_SECRET) {
     return Response.json({error: 'Unauthorized'}, {status: 401});
   }
-
+  
   try {
-    await insertVote(email, president, vice_president, treasurer, secretary, joint_secretary);
+    for (const [post, candidate] of Object.entries(votes)) {
+      await insertVote(email, post, candidate);
+    }
     return Response.json({success: true})
   } catch (e) {
     console.log(e);

@@ -8,5 +8,5 @@ export async function GET(request, response) {
     return Response.json({error: 'Unauthorized'}, {status: 401});
   }
 
-  return new Response(JSON.stringify(posts));
+  return new Response(JSON.stringify(await posts()));
 }

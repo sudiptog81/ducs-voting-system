@@ -13,14 +13,7 @@ import BarChart from '@/components/BarChart';
 export default function StatsPage() {
   const { push } = useRouter();
   const { data: session } = useSession();
-  const [stats, setStats] = useState({
-    president: [],
-    vice_president: [],
-    treasurer: [],
-    secretary: [],
-    joint_secretary: [],
-    total: 0
-  });
+  const [stats, setStats] = useState({});
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -52,6 +45,19 @@ export default function StatsPage() {
             </div>
           </div>
 
+          {
+            stats?.votes && Object.keys(stats.votes).map((key, index) => {
+              return (
+                <div className='font-semibold text-accented' key={index}>
+                  {key} Vote Count
+                  <div className='text-center text-6xl my-2 align-center w-96 mx-auto h-full text-center mt-16'>
+                    <BarChart data={stats.votes[key]} post={key} />
+                  </div>
+                </div>
+              )
+            })
+          }
+{/* 
           <div className='font-semibold text-accented'>
             President Vote Count
             <div className='text-left my-2'>
@@ -85,7 +91,7 @@ export default function StatsPage() {
             <div className='text-left my-2'>
               <BarChart data={stats.joint_secretary} post={'joint_secretary'} />
             </div>
-          </div>
+          </div> */}
         </div>
       </>
       <div className='w-96 pt-10 h-full m-auto text-center'>
