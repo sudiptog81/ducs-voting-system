@@ -93,7 +93,7 @@ $ yarn start
 2. Add the following environment variables
 
 ```sh
-DATABASE_URL="postgresql://<username>:<password>@<host>:<port>/<database>?schema=public" # For PostgreSQL
+DATABASE_URL="postgresql://<user>:<pass>@<host>:<port>/<db>" # For PostgreSQL
 
 NEXT_PUBLIC_SECRET="...secret used for stats and list pages..."
 NEXTAUTH_SECRET="...secret used for authentication..."
@@ -103,12 +103,17 @@ NEXTAUTH_SECRET="...secret used for authentication..."
 
 ## Screenshots
 
-![](.github/Screenshot from 2023-10-13 20-03-00.png)
-![](.github/Screenshot from 2023-10-13 20-04-14.png)
-![](.github/Screenshot from 2023-10-13 20-04-23.png)
-![](.github/Screenshot from 2023-10-13 20-04-36.png)
-![](.github/Screenshot from 2023-10-13 20-05-01.png)
-![](.github/Screenshot from 2023-10-13 20-05-08.png)
+![](".github/Screenshot from 2023-10-13 20-03-00.png")
+
+![](".github/Screenshot from 2023-10-13 20-04-14.png")
+
+![](".github/Screenshot from 2023-10-13 20-04-23.png")
+
+![](".github/Screenshot from 2023-10-13 20-04-36.png")
+
+![](".github/Screenshot from 2023-10-13 20-05-01.png")
+
+![](".github/Screenshot from 2023-10-13 20-05-08.png")
 
 ## License
 
