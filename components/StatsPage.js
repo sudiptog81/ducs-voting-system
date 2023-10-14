@@ -57,41 +57,6 @@ export default function StatsPage() {
               )
             })
           }
-{/* 
-          <div className='font-semibold text-accented'>
-            President Vote Count
-            <div className='text-left my-2'>
-              <BarChart data={stats.president} post={'president'} />
-            </div>
-          </div>
-
-          <div className='font-semibold text-accented'>
-            Vice President Vote Count
-            <div className='text-left my-2'>
-              <BarChart data={stats.vice_president} post={'vice_president'} />
-            </div>
-          </div>
-
-          <div className='font-semibold text-accented'>
-            Treasurer Vote Count
-            <div className='text-left my-2'>
-              <BarChart data={stats.treasurer} post={'treasurer'} />
-            </div>
-          </div>
-
-          <div className='font-semibold text-accented'>
-            Secretary Vote Count
-            <div className='text-left my-2'>
-              <BarChart data={stats.secretary} post={'secretary'} />
-            </div>
-          </div>
-
-          <div className='font-semibold text-accented'>
-            Joint Secretary Vote Count
-            <div className='text-left my-2'>
-              <BarChart data={stats.joint_secretary} post={'joint_secretary'} />
-            </div>
-          </div> */}
         </div>
       </>
       <div className='w-96 pt-10 h-full m-auto text-center'>

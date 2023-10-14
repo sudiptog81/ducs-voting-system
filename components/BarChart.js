@@ -23,7 +23,7 @@ ChartJS.register(
 
 export default function BarChart({ data, post }) {
   const chartData = {
-    labels: data.map(d => d.name),
+    labels: data.map(d => d.course != 'NOTA' ? [d.name, d.course] : d.name),
     datasets: [
       {
         label: "Votes",

@@ -101,14 +101,17 @@ export default function StartPage() {
                 </div>
               )}
               {posts && posts.map((e, i) => (
-                <div key={i} id='post-div p-4 m-4 row-gap-4'>
+                <div key={i} id='post-div p-4 row-gap-4'>
                   <h2 className='font-semibold mt-4 mb-2'>{e.post}</h2>
                   <div className='flex flex-col'>
                     {e.candidates.map((_e, i) => (
                       <div key={i} id='candidate-div flex flex-row'>
-                        <label  htmlFor={_e.name + '-' + e.post}>
+                        <label className='flex flex-row' htmlFor={_e.name + '-' + e.post}>
                           <input type='radio' required name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post} />
-                          <span className='ml-4'>{_e.name}</span>
+                          <div className='ml-4'>
+                            <div>{_e.name}</div>
+                            {_e.course != 'NOTA' && <div className='text-sm text-gray-10 italic text-accented'>{_e.course}</div>}
+                          </div>
                         </label>
                       </div>
                     ))} 
