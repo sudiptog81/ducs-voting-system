@@ -9,6 +9,8 @@ import {
   BarElement,
   Colors
 } from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 
 import { Bar } from "react-chartjs-2";
 
@@ -18,6 +20,7 @@ ChartJS.register(
   Tooltip,
   PointElement,
   BarElement,
+  ChartDataLabels,
   Colors
 )
 
@@ -31,6 +34,8 @@ export default function BarChart({ data, post }) {
         backgroundColor: "#652b7c",
         borderColor: "#652b7c",
         borderWidth: 1,
+        barThickness: 24,
+        maxBarThickness: 24,
       },
     ],
   };
@@ -48,15 +53,17 @@ export default function BarChart({ data, post }) {
       legend: {
         display: true,
       },
-      colors: {
-        enabled: true
-      }
+      datalabels: {
+        display: true,
+        color: 'white',
+        rotation: -90,
+      },
     },
   };
 
   return (
-    <div className='w-96 mx-auto h-full text-center mt-10'>
-      <Bar data={chartData} options={options} />
+    <div className='w-96 mx-auto h-full text-center'>
+      <Bar data={chartData} options={options} className="mt-0"/>
     </div>
   );
 }

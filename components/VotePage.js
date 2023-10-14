@@ -94,9 +94,9 @@ export default function StartPage() {
         <>
           <form id='voting-form' onSubmit={handleSubmit}>
             <input type='hidden' name='email' value={session.user.email} />
-            <div className='w-96 pt-10 h-full m-auto grid grid-cols-2 justify-between'>
+            <div className='w-6/12 pt-10 h-full m-auto grid grid-cols-2 justify-between'>
               {posts.length == 0  && (
-                <div className='w-96 pt-10 h-full m-auto text-center flex items-center justify-center'>
+                <div className='w-full pt-10 h-full m-auto text-center flex items-center justify-center'>
                   <SpinnerLoading />
                 </div>
               )}
@@ -104,17 +104,41 @@ export default function StartPage() {
                 <div key={i} id='post-div p-4 row-gap-4'>
                   <h2 className='font-semibold mt-4 mb-2'>{e.post}</h2>
                   <div className='flex flex-col'>
+                    <fieldset className="space-y-4">
                     {e.candidates.map((_e, i) => (
                       <div key={i} id='candidate-div' className='flex mb-2'>
-                        <div class="flex items-center h-ful">
-                            <input required name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post} aria-describedby="helper-radio-text" type="radio" class="w-4 h-4 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:border-gray-600"/>
-                        </div>
-                        <div class="ml-2 text-sm">
-                            <label htmlFor={_e.name + '-' + e.post}>{_e.name}</label>
-                            {_e.course != 'NOTA' && <p id="helper-radio-text" class="text-xs font-normal text-accented italic">{_e.course}</p>}
-                        </div>
+                        <input
+                          type="radio"
+                          required name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post}
+                          className="peer hidden [&:checked_+_label_svg]:block"
+                        />
+
+                        <label
+                          htmlFor={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post}
+                          className="block w-full mr-4 cursor-pointer rounded-lg border border-gray-100 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 peer-checked:border-[#652b7c] peer-checked:ring-1 peer-checked:ring-[#652b7c]"
+                        >
+                          <div className="flex items-center justify-between">
+                            <p className="">{_e.name}</p>
+                            <svg
+                              className="hidden h-5 w-5 text-[#652b7c]"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          {_e.course != 'NOTA' && (
+                            <p className="mt-1 text-accented italics">{_e.course}</p>
+                          )}
+                        </label>
                       </div>
                     ))} 
+                    </fieldset>
                   </div>
                 </div>
               ))}

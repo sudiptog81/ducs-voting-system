@@ -9,6 +9,7 @@ import Navbar from '@/components/Navbar'
 import LoginBtn from '@/components/LoginBtn'
 import { useEffect, useState } from 'react';
 import BarChart from '@/components/BarChart';
+import SpinnerLoading from './Loader';
 
 export default function StatsPage() {
   const { push } = useRouter();
@@ -37,20 +38,30 @@ export default function StatsPage() {
     <>
       <Navbar />
       <>
+        {
+          !stats?.votes && (
+            <div className='w-full pt-10 h-full m-auto text-center flex items-center justify-center'>
+                  <SpinnerLoading />
+                </div>
+          )
+        }
         <div className='w-100 mx-auto h-full text-center grid grid-cols-2 lg:grid-cols-3 mt-10'>
-          <div className='font-semibold text-accented'>
-            Total Vote Count
-            <div className='text-center text-6xl my-2 align-center w-96 mx-auto h-full text-center mt-16'>
-              {stats.total}
-            </div>
-          </div>
-
+          {
+            stats?.votes && (
+              <div className='font-semibold text-accented'>
+                Total Vote Count
+                <div className='text-center text-6xl my-2 align-center w-96 mx-auto h-full text-center mt-14'>
+                  {stats.total}
+                </div>
+              </div>
+            )
+          }
           {
             stats?.votes && Object.keys(stats.votes).map((key, index) => {
               return (
                 <div className='font-semibold text-accented' key={index}>
                   {key} Vote Count
-                  <div className='text-center text-6xl my-2 align-center w-96 mx-auto h-full text-center mt-16'>
+                  <div className='text-center text-6xl my-2 align-center w-full mx-auto h-full text-center'>
                     <BarChart data={stats.votes[key]} post={key} />
                   </div>
                 </div>
