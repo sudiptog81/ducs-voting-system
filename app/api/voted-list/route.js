@@ -10,6 +10,6 @@ export async function POST(request, response) {
     return Response.json({error: 'Unauthorized'}, {status: 401});
   }
 
-  const users = await getVotedUsers()
+  const users = await getVotedUsers(25)
   return Response.json({voted: users})
 }

@@ -90,7 +90,7 @@ export default function StartPage() {
               <div>
                 <form onSubmit={handleSignIn} className='mb-5'>
                   <select required name="role" className='bg-accented border border-gray-300 text-white rounded-lg w-full p-2.5' value={course} onChange={(e) => setCourse(e.target.value)}>
-                    <option value="" disabled selected>Select Course</option>
+                    <option value="" disabled defaultValue={''}>Select Course</option>
                     {
                       courses.map((course, index) => (
                         <option key={index} value={course.name}>{course.name}</option>

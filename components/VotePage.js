@@ -54,6 +54,18 @@ export default function StartPage() {
       object[key] = value;
     });
 
+    if (!object?.agree) {
+      alert('Please agree to the terms and conditions!');
+      return;
+    }
+
+    for (let p of posts) {
+      if (!object[p.post]) {
+        alert(`Please vote for at least one candidate for the post of ${p.post}!`);
+        return;
+      }
+    }
+
     object['votes'] = {};
     for (const [key, value] of formData.entries()) {
       if (key != 'email' && key != 'agree' && key != 'secret') {
@@ -99,7 +111,7 @@ export default function StartPage() {
           )}
           <form id='voting-form' onSubmit={handleSubmit}>
             <input type='hidden' name='email' value={session.user.email} />
-            <div className='w-6/12 pt-10 h-full m-auto grid grid-cols-2 justify-between'>
+            <div className='w-6/12 pt-10 h-full m-auto grid grid-cols-2 gap-x-4 justify-between'>
               {posts && posts.map((e, i) => (
                 <div key={i} id='post-div p-4 row-gap-4'>
                   <h2 className='font-semibold mt-4 mb-2'>{e.post}</h2>
@@ -109,7 +121,7 @@ export default function StartPage() {
                       <div key={i} id='candidate-div' className='flex mb-2'>
                         <input
                           type="radio"
-                          required name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post}
+                          name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post}
                           className="peer hidden [&:checked_+_label_svg]:block"
                         />
 
@@ -126,14 +138,14 @@ export default function StartPage() {
                               fill="currentColor"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </div>
                           {_e.course != 'NOTA' && (
-                            <p className="mt-1 text-accented italics">{_e.course}</p>
+                            <p className="mt-1 text-accented">{_e.course}</p>
                           )}
                         </label>
                       </div>
@@ -145,7 +157,7 @@ export default function StartPage() {
             </div>
             <div className='w-100 pt-10 h-full m-auto flex justify-center items-center align-center'>
               <input type='checkbox' required name='agree' id='agree' />
-              <label htmlFor='agree' className='ml-2'>I agree that I am voting for the selected candidates</label>
+              <label htmlFor='agree' className='ml-2'>I confirm that I am voting for the selected candidates and will not be able to change my choice or vote again.</label>
             </div>
             <div className='w-96 pt-10 h-full m-auto flex justify-center items-center align-center'>
               <input className='rounded bg-accented text-white p-3 mx-2 cursor-pointer' type='submit' />

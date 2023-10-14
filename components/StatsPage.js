@@ -45,7 +45,7 @@ export default function StatsPage() {
                 </div>
           )
         }
-        <div className='w-100 mx-auto h-full text-center grid grid-cols-2 lg:grid-cols-3 mt-10'>
+        <div className='w-100 mx-auto h-full text-center grid grid-cols-2 gap-y-10 gap-x-4 lg:grid-cols-3 mt-10'>
           {
             stats?.votes && (
               <div className='font-semibold text-accented'>
@@ -61,7 +61,7 @@ export default function StatsPage() {
               return (
                 <div className='font-semibold text-accented' key={index}>
                   {key} Vote Count
-                  <div className='text-center text-6xl my-2 align-center w-full mx-auto h-full text-center'>
+                  <div className='text-center text-6xl my-2 align-center w-full h-full mx-auto text-center'>
                     <BarChart data={stats.votes[key]} post={key} />
                   </div>
                 </div>
