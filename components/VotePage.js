@@ -92,14 +92,14 @@ export default function StartPage() {
       )}
       {session && !voted && (
         <>
+          {posts.length == 0  && (
+            <div className='w-full pt-10 h-full m-auto text-center flex items-center justify-center'>
+              <SpinnerLoading />
+            </div>
+          )}
           <form id='voting-form' onSubmit={handleSubmit}>
             <input type='hidden' name='email' value={session.user.email} />
             <div className='w-6/12 pt-10 h-full m-auto grid grid-cols-2 justify-between'>
-              {posts.length == 0  && (
-                <div className='w-full pt-10 h-full m-auto text-center flex items-center justify-center'>
-                  <SpinnerLoading />
-                </div>
-              )}
               {posts && posts.map((e, i) => (
                 <div key={i} id='post-div p-4 row-gap-4'>
                   <h2 className='font-semibold mt-4 mb-2'>{e.post}</h2>
