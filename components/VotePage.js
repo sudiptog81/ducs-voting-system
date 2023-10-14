@@ -110,7 +110,7 @@ export default function StartPage() {
                             <input required name={e.post} value={_e.name} id={_e.name.replaceAll(/\s+/g, '-') + '-' + e.post} aria-describedby="helper-radio-text" type="radio" class="w-4 h-4 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:border-gray-600"/>
                         </div>
                         <div class="ml-2 text-sm">
-                            <label htmlFor={_e.name + '-' + e.post} class="font-medium">{_e.name}</label>
+                            <label htmlFor={_e.name + '-' + e.post}>{_e.name}</label>
                             {_e.course != 'NOTA' && <p id="helper-radio-text" class="text-xs font-normal text-accented italic">{_e.course}</p>}
                         </div>
                       </div>
