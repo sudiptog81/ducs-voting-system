@@ -1,30 +1,42 @@
-import {insertVote, checkVoted} from "@/lib/db";
+import { authOptions } from "@/lib/auth";
+import { insertVote } from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/dist/server/api-utils";
-import { NextResponse } from "next/server";
 
 export async function POST(request, response) {
-  // check if user is authenticated
-  const session = await getServerSession({req: request});
+  const session = await getServerSession(
+    request,
+    {
+      ...response,
+      getHeader: (name) => response.headers?.get(name),
+      setHeader: (name, value) => response.headers?.set(name, value),
+    },
+    authOptions,
+  );
 
   if (!session) {
-    return Response.json({error: 'Unauthorized'}, {status: 401});
+    return Response.json(
+      { error: "Unauthorized", success: false },
+      { status: 401 },
+    );
   }
 
   const data = await request.json();
-  const {email, votes, secret} = data;
+  const { email, votes, secret } = data;
 
   if (secret != process.env.NEXT_PUBLIC_SECRET) {
-    return Response.json({error: 'Unauthorized'}, {status: 401});
+    return Response.json(
+      { error: "Unauthorized", success: false },
+      { status: 401 },
+    );
   }
-  
+
   try {
     for (const [post, candidate] of Object.entries(votes)) {
       await insertVote(email, post, candidate);
     }
-    return Response.json({success: true})
+    return Response.json({ success: true });
   } catch (e) {
     console.log(e);
-    return Response.json({success: false})
-  }  
+    return Response.json({ success: false });
+  }
 }

@@ -1,3 +1,5 @@
+# DUCS Voting System
+
 This repository contains the source code for the voting system used for DUCSS Elections 2023. It was built on top of the Next.js framework and uses Prisma as an ORM for the database. The databases used were PostgreSQL for deployed instances and SQLite for offline instances.
 
 ## Features
@@ -48,7 +50,7 @@ $ cd ducs-voting-system
 
 ```sh
 $ yarn install --include=dev
-``````
+```
 
 3. Create a `.env` file in the root directory and add the following environment variables
 
@@ -63,13 +65,20 @@ NEXTAUTH_SECRET="...secret used for authentication..."
 4. Run the migrations
 
 ```sh
-$ yarn prisma migrate dev
+$ yarn prisma migrate reset
+$ yarn prisma db push
 ```
 
 5. Run the development server
 
 ```sh
 $ yarn dev
+```
+
+6. Start the database interface
+
+```sh
+$ yarn prisma studio
 ```
 
 ### Deployment
@@ -103,12 +112,12 @@ NEXTAUTH_SECRET="...secret used for authentication..."
 
 ## Screenshots
 
-![1](./.github/Screenshot%20from%202023-10-13%2020-03-00.png)
-![2](./.github/Screenshot%20from%202023-10-13%2020-04-14.png)
-![3](./.github/Screenshot%20from%202023-10-13%2020-04-23.png)
-![4](./.github/Screenshot%20from%202023-10-13%2020-04-36.png)
-![5](./.github/Screenshot%20from%202023-10-13%2020-05-01.png)
-![6](./.github/Screenshot%20from%202023-10-13%2020-05-08.png)
+![1](./.github/1.png)
+![2](./.github/2.png)
+![3](./.github/3.png)
+![4](./.github/4.png)
+![5](./.github/5.png)
+![6](./.github/6.png)
 
 ## License
 
