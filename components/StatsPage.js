@@ -18,15 +18,17 @@ export default function StatsPage() {
       router.push("/");
     }
 
-    fetch("/api/stats", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ secret: process.env.NEXT_PUBLIC_SECRET }),
-    })
-      .then((res) => res.json())
-      .then((res) => setStats(res.stats));
+    setInterval(() => {
+      fetch("/api/stats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ secret: process.env.NEXT_PUBLIC_SECRET }),
+      })
+        .then((res) => res.json())
+        .then((res) => setStats(res.stats));
+    }, 5000);
   }, []);
 
   return (
