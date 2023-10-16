@@ -187,6 +187,12 @@ export default function StartPage() {
                 Proceed
               </Link>
             )}
+            <button
+              className="rounded bg-accented text-white p-3 mx-2"
+              onClick={() => signOut()}
+            >
+              Logout
+            </button>
           </div>
         </>
       )}
