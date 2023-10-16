@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="w-96 pt-10 h-full m-auto text-center flex justify-center">
+    <div className="w-96 py-10 h-full m-auto text-center flex justify-center">
       Developed with{" "}
       <svg
         xmlns="http://www.w3.org/2000/svg"
