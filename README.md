@@ -21,7 +21,6 @@ This repository contains the source code for the voting system used for DUCSS El
 - The list of students who can vote is stored in the `User` table in the database
 - The list of candidates running for various posts is stored in the `Candidate` table in the database
 - The list of votes casted by students is stored in the `Vote` table in the database
-- The list of courses is stored in the `Course` relation in the database
 
 ### Guarded Routes
 
