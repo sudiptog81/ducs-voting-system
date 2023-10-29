@@ -1,0 +1,17 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "yarn"
+      - run: yarn
+      - run: yarn build
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXT_PUBLIC_SECRET: ${{ secrets.NEXT_PUBLIC_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
